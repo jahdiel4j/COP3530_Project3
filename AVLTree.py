@@ -63,7 +63,7 @@ class AVLTree:
         elif new_node.date > node.date:
             node.right = self.insert_date(new_node, node.right)
             # Perform any necessary rotation
-            if abs(self.get_balance_factor(node)) == 2:
+            if abs(self.get_balance_factor(node)) >= 2:
                 if new_node.date > node.right.date:
                     node = self.rotate_left(node)
                 else:
@@ -72,7 +72,7 @@ class AVLTree:
         elif new_node.date < node.date:
             node.left = self.insert_date(new_node, node.left)
             # Perform any necessary rotation
-            if abs(self.get_balance_factor(node)) == 2:
+            if abs(self.get_balance_factor(node)) >= 2:
                 if new_node.date < node.left.date:
                     node = self.rotate_right(node)
                 else:
@@ -84,7 +84,9 @@ class AVLTree:
 
     """ Insert a date into tree"""
     def insert(self, date, stock_value):
-        new_node = Node(int(date), int(stock_value))
+        int_date = int(date)
+        int_stock_value = int(stock_value)
+        new_node = Node(int_date, int_stock_value)
         self.root = self.insert_date(new_node, self.root)
 
     """ Search a date in tree. Returns stock value """
@@ -92,15 +94,16 @@ class AVLTree:
         node = self.root
 
         while node is not None:
-            if node.date is int(date):
+            if node.date == int(date):
                 return node.stock_value
             elif node.date < int(date):
                 node = node.right
             elif node.date > int(date):
                 node = node.left
 
-        return None
+        return 0
 
+    """ Print inorder traversal for debugging """
     def print_inorder(self, node):
         if node is None:
             return
