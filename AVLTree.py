@@ -9,38 +9,36 @@ General implementation of AVL Tree from my own Project 1 solution
 
 class AVLTree:
     root = None
-    nodeCount = 0
 
-    """ Left Rotation in case of Right-Right imbalance"""
+    """ Left Rotation in case of Right-Right imbalance """
     def rotate_left(self, node):
         parent = node.right
         node.right = parent.left
         parent.left = node
         return parent
 
-
-    """ Right Rotation in case of Left-Left imbalance"""
+    """ Right Rotation in case of Left-Left imbalance """
     def rotate_right(self, node):
         parent = node.left
         node.left = parent.right
         parent.right = node
         return parent
 
-    """ Left-Right Rotation in case of Left-Right imbalance"""
+    """ Left-Right Rotation in case of Left-Right imbalance """
     def rotate_left_right(self, node):
-        """ Left rotation on node's left child """
+        # Left rotation on node's left child
         middle = self.rotate_left(node.left)
         node.left = middle
-        """ Right rotation on node """
+        # Right rotation on node
         node = self.rotate_right(node)
         return node
 
-    """ Right-Left Rotation in case of Right-Left imbalance"""
+    """ Right-Left Rotation in case of Right-Left imbalance """
     def rotate_right_left(self, node):
-        """ Right rotation on node's right child"""
+        # Right rotation on node's right child
         middle = self.rotate_right(node.right)
         node.right = middle
-        """ Left rotation on node """
+        # Left rotation on node
         node = self.rotate_left(node)
         return node
 
@@ -56,16 +54,16 @@ class AVLTree:
 
     """ Helper function: Insertion into tree """
     def insert_date(self, new_node, node):
-        """ Base case: If we reach a child of a leaf, then insert here """
-        """ Recursive case: Traverse thru tree to find appropriate insertion point """
+        # Base case: If we reach a child of a leaf, then insert here
+        # Recursive case: Traverse thru tree to find appropriate insertion point
         if node is None:
             node = new_node
             return node
 
         elif new_node.date > node.date:
             node.right = self.insert_date(new_node, node.right)
-            """ Perform any necessary rotation """
-            if self.get_balance_factor(node) == -2:
+            # Perform any necessary rotation
+            if abs(self.get_balance_factor(node)) == 2:
                 if new_node.date > node.right.date:
                     node = self.rotate_left(node)
                 else:
@@ -73,33 +71,32 @@ class AVLTree:
 
         elif new_node.date < node.date:
             node.left = self.insert_date(new_node, node.left)
-            """ Perform any necessary rotation """
-            if self.get_balance_factor(node) == 2:
+            # Perform any necessary rotation
+            if abs(self.get_balance_factor(node)) == 2:
                 if new_node.date < node.left.date:
                     node = self.rotate_right(node)
                 else:
                     node = self.rotate_left_right(node)
 
-        """ Increment height of each node in the traversal """
+        # Increment height of each node in the traversal
         node.height = 1 + max(self.find_height(node.left), self.find_height(node.right))
         return node
 
     """ Insert a date into tree"""
-    def insert(self, date):
-        new_node = Node(date)
+    def insert(self, date, stock_value):
+        new_node = Node(int(date), int(stock_value))
         self.root = self.insert_date(new_node, self.root)
-        self.nodeCount += 1
 
-    """ Search a date in tree """
+    """ Search a date in tree. Returns stock value """
     def search(self, date):
         node = self.root
 
         while node is not None:
-            if node.date is date:
-                return node
-            elif node.date < date:
+            if node.date is int(date):
+                return node.stock_value
+            elif node.date < int(date):
                 node = node.right
-            elif node.date > date:
+            elif node.date > int(date):
                 node = node.left
 
         return None
@@ -110,4 +107,5 @@ class AVLTree:
 
         self.print_inorder(node.left)
         print(node.date)
+        print(node.stock_value)
         self.print_inorder(node.right)
