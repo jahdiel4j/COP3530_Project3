@@ -3,10 +3,10 @@ from AVLTree import AVLTree
 def main():
     tree = AVLTree()
 
-    for i in range(5):
-        val = input("Enter date: ")
-        stock = input("Enter stock value: ")
-        tree.insert(val, stock)
+    for i in range(20050101, 20201127):
+        #val = input("Enter date: ")
+        #stock = input("Enter stock value: ")
+        tree.insert(i, 1)
 
     tree.print_inorder(tree.root)
     

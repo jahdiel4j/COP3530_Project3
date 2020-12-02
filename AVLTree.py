@@ -85,8 +85,8 @@ class AVLTree:
     """ Insert a date into tree"""
     def insert(self, date, stock_value):
         int_date = int(date)
-        int_stock_value = int(stock_value)
-        new_node = Node(int_date, int_stock_value)
+        float_stock_value = float(stock_value)
+        new_node = Node(int_date, float_stock_value)
         self.root = self.insert_date(new_node, self.root)
 
     """ Search a date in tree. Returns stock value """
@@ -101,7 +101,7 @@ class AVLTree:
             elif node.date > int(date):
                 node = node.left
 
-        return 0
+        return -1
 
     """ Print inorder traversal for debugging """
     def print_inorder(self, node):
