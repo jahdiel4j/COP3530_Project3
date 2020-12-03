@@ -8,7 +8,7 @@ class HashMap:
         index = date-20000101
         self.arr[index] = value
 
-    def retrieve(self, date):
-        index = date-20000101
+    def search(self, date):
+        index = int(date)-20000101
         return self.arr[index]
 
