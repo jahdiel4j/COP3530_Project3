@@ -81,7 +81,7 @@ class HashSetup:
                 max_growth = (end_value-start_value)
                 max_company = company
 
-        return max_company
+        return max_company, max_growth
 
     def find_worst_stock_growth(self, companies, start_date, end_date):
         min_growth = 1000  # arbitrary value to compare initial growth. No stock grows $1000 in one day, so we are safe
@@ -102,7 +102,7 @@ class HashSetup:
                 min_growth = (end_value-start_value)
                 min_company = company
 
-        return min_company
+        return min_company, min_growth
 
 setup = HashSetup()
 setup.initialize_companies_map()
