@@ -57,20 +57,10 @@ class HashSetup:
     """ Given a company abbreviation, a start date and end date given in MM/DD/YYYY format,
         return the growth of said stock over said time period
     """
-    def search(self, company, start_date, end_date):
-        max_growth = 0  # if either date is invalid, return 0 growth
-        start_date = self.convert_date(start_date)
-        end_date = self.convert_date(end_date)
-
-        # compute value of given company at given dates
-        l = self.companies_list[company].search(start_date)
-        h = self.companies_list[company].search(end_date)
-
-        # if both dates were valid, return final price - initial price, which equals growth
-        if h != -1 and l != -1:
-            max_growth = h-l
-
-        return max_growth
+    def search(self, company, date):
+        date = self.convert_date(date)
+        # compute and return value of given company at given date
+        return self.companies_list[company].search(date)
 
     def find_best_stock_growth(self, companies, start_date, end_date):
         max_growth = -1000 # arbitrary value to compare initial growth. No stock drops $1000 in one day, so we are safe
@@ -91,7 +81,7 @@ class HashSetup:
                 max_growth = (end_value-start_value)
                 max_company = company
 
-        return max_company, max_growth
+        return max_company
 
     def find_worst_stock_growth(self, companies, start_date, end_date):
         min_growth = 1000  # arbitrary value to compare initial growth. No stock grows $1000 in one day, so we are safe
@@ -112,11 +102,14 @@ class HashSetup:
                 min_growth = (end_value-start_value)
                 min_company = company
 
-        return min_company, min_growth
+        return min_company
 
 setup = HashSetup()
 setup.initialize_companies_map()
 
 # Testing:
-#com, pric = setup.find_worst_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
-#print(com, ": ", pric)
+"""com = setup.find_worst_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
+print(com)
+
+com = setup.find_best_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
+print(com)"""

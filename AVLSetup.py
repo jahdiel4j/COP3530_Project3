@@ -54,15 +54,68 @@ class AVLSetup:
 
     """ Searches for a stock value for a given company & date """
     def search(self, company, date):
+        date = self.convert_date(date)
+        # compute and return value of given company at given date
         return self.companies_list[company].search(date)
+
+    def find_best_stock_growth(self, companies, start_date, end_date):
+        max_growth = -1000 # arbitrary value to compare initial growth. No stock drops $1000 in one day, so we are safe
+        max_company = ""   # if all the companies are invalid at the given dates, say holiday, returns empty string for company name
+
+        start_date = self.convert_date(start_date)
+        end_date = self.convert_date(end_date)
+
+        # for every company the user wanted to compare
+        for company in companies:
+            # compute value of company at start and end dates
+            start_value = self.companies_list[company].search(start_date)
+            end_value = self.companies_list[company].search(end_date)
+
+            # if the company value was valid at both dates and the growth is greater than the maximum growth,
+            # reassign return values to current company
+            if (start_value != -1 and end_value != -1 and end_value-start_value) > max_growth:
+                max_growth = (end_value-start_value)
+                max_company = company
+
+        return max_company
+
+    def find_worst_stock_growth(self, companies, start_date, end_date):
+        min_growth = 1000  # arbitrary value to compare initial growth. No stock grows $1000 in one day, so we are safe
+        min_company = ""   # if all the companies are invalid at the given dates, say holiday, returns empty string for company name
+
+        start_date = self.convert_date(start_date)
+        end_date = self.convert_date(end_date)
+
+        # for every company the user wanted to compare
+        for company in companies:
+            # compute value of company at start and end dates
+            start_value = self.companies_list[company].search(start_date)
+            end_value = self.companies_list[company].search(end_date)
+
+            # if the company value was valid at both dates and the growth is less than the minimum growth,
+            # reassign return values to current company
+            if (start_value != -1 and end_value != -1 and end_value-start_value) < min_growth:
+                min_growth = (end_value-start_value)
+                min_company = company
+
+        return min_company
+
+
 
 
 setup = AVLSetup()
 setup.initialize_companies_map()
 
-for i in range(5):
+# Testing:
+
+"""com = setup.find_worst_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
+print(com)
+
+com = setup.find_best_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
+print(com)"""
+
+"""for i in range(5):
     date = input("Enter date in YYYYMMDD format: ")
     company = input("Enter company stock abbreviation: ")
     result = setup.search(company, date)
-    print('%.2f' %result)
-
+    print('%.2f' %result)"""
