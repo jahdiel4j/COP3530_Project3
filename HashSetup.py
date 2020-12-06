@@ -33,7 +33,7 @@ class HashSetup:
         companies = next(reader)
 
         for i in range(len(companies)):
-            # Index 0 in the 1st row is where it says "Date"
+            # Index 0 in the 1st column is where it says "Date"
             if i != 0:
                 self.companies_list[companies[i]] = HashMap()
                 self.ordered_companies.append(companies[i])
@@ -54,17 +54,39 @@ class HashSetup:
 
         csv_file.close()
 
-    """ Searches for a stock value for a given company & date """
+    def search(self, company, start_date, end_date):
+        max_growth = -1
+        start_date = self.convert_date(start_date)
+        end_date = self.convert_date(end_date)
 
-    def search(self, company, date):
-        return self.companies_list[company].search(date)
+        l = self.companies_list[company].search(start_date)
+        h = self.companies_list[company].search(end_date)
 
+        if h != -1 and l != -1:
+            max_growth = h-l
+
+        return max_growth
+
+    def find_best_stock_growth(self, start_date, end_date):
+        max_growth = -1
+        max_company = ""
+        start_value = 0
+        end_value = 0
+        start_date = self.convert_date(start_date)
+        end_date = self.convert_date(end_date)
+
+        for company in self.companies_list:
+            start_value = self.companies_list[company].search(start_date)
+            end_value = self.companies_list[company].search(end_date)
+
+            if (start_value != -1 and end_value != -1 and end_value-start_value) > max_growth:
+                max_growth = (end_value-start_value)
+                max_company = company
+
+        return max_company, max_growth
 
 setup = HashSetup()
 setup.initialize_companies_map()
 
-for i in range(5):
-    date = input("Enter date in YYYYMMDD format: ")
-    company = input("Enter company stock abbreviation: ")
-    result = setup.search(company, date)
-    print('%.2f' % result)
+#com, pric = setup.find_best_stock_growth('01/03/2005', '01/04/2005')
+#print(com, ": ", pric)
