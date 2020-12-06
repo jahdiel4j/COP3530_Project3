@@ -90,7 +90,6 @@ output_box.place(relx=0.425, rely=0.76)
 
 """ --- Companies --- """
 
-# Company options
 company_label = tk.Label(root, text="COMPANIES")
 company_label.config(font=("Calibri", 12, "bold"))
 company_label.place(relx=0.15, rely=0.1)
@@ -98,150 +97,99 @@ company_label.place(relx=0.15, rely=0.1)
 # Column 1
 var1 = tk.StringVar()
 google = tk.Checkbutton(root, text="Google", variable=var1, onvalue = "Google is checked", offvalue="Google is unchecked")
-google.deselect()
-google.config(font=("Calibri", 12))
 google.place(relx=0.07, rely=0.16)
 
 microsoft = tk.Checkbutton(root, text="Microsoft")
-microsoft.deselect()
-microsoft.config(font=("Calibri", 12))
 microsoft.place(relx=0.07, rely=0.21)
 
 acn = tk.Checkbutton(root, text="ACN")
-acn.deselect()
-acn.config(font=("Calibri", 12))
 acn.place(relx=0.07, rely=0.26)
 
 adobe = tk.Checkbutton(root, text="Adobe")
-adobe.deselect()
-adobe.config(font=("Calibri", 12))
 adobe.place(relx=0.07, rely=0.31)
+
 amazon = tk.Checkbutton(root, text="Amazon")
-amazon.deselect()
-amazon.config(font=("Calibri", 12))
 amazon.place(relx=0.07, rely=0.36)
 
 cisco = tk.Checkbutton(root, text="Cisco")
-cisco.deselect()
-cisco.config(font=("Calibri", 12))
 cisco.place(relx=0.07, rely=0.41)
 
 fb = tk.Checkbutton(root, text="Facebook")
-fb.deselect()
-fb.config(font=("Calibri", 12))
 fb.place(relx=0.07, rely=0.46)
 
 ibm = tk.Checkbutton(root, text="IBM")
-ibm.deselect()
-ibm.config(font=("Calibri", 12))
 ibm.place(relx=0.07, rely=0.51)
 
 intel = tk.Checkbutton(root, text="Intel")
-intel.deselect()
-intel.config(font=("Calibri", 12))
 intel.place(relx=0.07, rely=0.56)
 
 netflix = tk.Checkbutton(root, text="Netflix")
-netflix.deselect()
-netflix.config(font=("Calibri", 12))
 netflix.place(relx=0.07, rely=0.61)
 
 oracle = tk.Checkbutton(root, text="Oracle")
-oracle.deselect()
-oracle.config(font=("Calibri", 12))
 oracle.place(relx=0.07, rely=0.66)
 
 salesforce = tk.Checkbutton(root, text="Salesforce")
-salesforce.deselect()
-salesforce.config(font=("Calibri", 12))
 salesforce.place(relx=0.07, rely=0.71)
 
-qualcom = tk.Checkbutton(root, text="Qualcomm")
-qualcom.deselect()
-qualcom.config(font=("Calibri", 12))
-qualcom.place(relx=0.07, rely=0.76)
+qualcomm = tk.Checkbutton(root, text="Qualcomm")
+qualcomm.place(relx=0.07, rely=0.76)
 
 exxon = tk.Checkbutton(root, text="Exxon")
-exxon.deselect()
-exxon.config(font=("Calibri", 12))
 exxon.place(relx=0.07, rely=0.81)
 
 att = tk.Checkbutton(root, text="AT&T")
-att.deselect()
-att.config(font=("Calibri", 12))
 att.place(relx=0.07, rely=0.86)
 
 # Column 2
 apple = tk.Checkbutton(root, text="Apple")
-apple.deselect()
-apple.config(font=("Calibri", 12))
 apple.place(relx=0.22, rely=0.16)
 
 bankA = tk.Checkbutton(root, text="Bank of America")
-bankA.deselect()
-bankA.config(font=("Calibri", 12))
 bankA.place(relx=0.22, rely=0.21)
 
 ge = tk.Checkbutton(root, text="General Electric")
-ge.deselect()
-ge.config(font=("Calibri", 12))
 ge.place(relx=0.22, rely=0.26)
 
 lock = tk.Checkbutton(root, text="Lockhead Martin")
-lock.deselect()
-lock.config(font=("Calibri", 12))
 lock.place(relx=0.22, rely=0.31)
 
 hp = tk.Checkbutton(root, text="Hewlett-Packard")
-hp.deselect()
-hp.config(font=("Calibri", 12))
 hp.place(relx=0.22, rely=0.36)
 
 jpm = tk.Checkbutton(root, text="JPMorgan Chase")
-jpm.deselect()
-jpm.config(font=("Calibri", 12))
 jpm.place(relx=0.22, rely=0.41)
 
 pg = tk.Checkbutton(root, text="Proctor and Gamble")
-pg.deselect()
-pg.config(font=("Calibri", 12))
 pg.place(relx=0.22, rely=0.46)
 
 ups = tk.Checkbutton(root, text="UPS")
-ups.deselect()
-ups.config(font=("Calibri", 12))
 ups.place(relx=0.22, rely=0.51)
 
 dell = tk.Checkbutton(root, text="Dell")
-dell.deselect()
-dell.config(font=("Calibri", 12))
 dell.place(relx=0.22, rely=0.56)
 
 raytheon = tk.Checkbutton(root, text="Raytheon")
-raytheon.deselect()
-raytheon.config(font=("Calibri", 12))
 raytheon.place(relx=0.22, rely=0.61)
 
 wf = tk.Checkbutton(root, text="Wells Fargo")
-wf.deselect()
-wf.config(font=("Calibri", 12))
 wf.place(relx=0.22, rely=0.66)
 
 appen = tk.Checkbutton(root, text="Appen")
-appen.deselect()
-appen.config(font=("Calibri", 12))
 appen.place(relx=0.22, rely=0.71)
 
 disney = tk.Checkbutton(root, text="Disney")
-disney.deselect()
-disney.config(font=("Calibri", 12))
 disney.place(relx=0.22, rely=0.76)
 
 kroger = tk.Checkbutton(root, text="Kroger")
-kroger.deselect()
-kroger.config(font=("Calibri", 12))
 kroger.place(relx=0.22, rely=0.81)
 
+company_vars = [google, microsoft, acn, adobe, amazon, cisco, fb, ibm, intel, netflix, oracle, salesforce, qualcomm,
+                exxon, att, apple, bankA, ge, lock, hp, jpm, pg, ups, dell, raytheon, wf, appen, disney, kroger]
+
+for company in company_vars:
+    company.deselect()
+    company.config(font=("Calibri", 12))
 
 """ --- Analysis Buttons --- """
 
