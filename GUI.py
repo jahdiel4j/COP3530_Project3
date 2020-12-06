@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkcalendar
 
 """ --- Window Set-up --- """
 
@@ -27,6 +28,23 @@ clicked.set(structures[0])
 
 menu = tk.OptionMenu(root, clicked, *structures)
 menu.place(relx=0.87, rely=0.05)
+
+
+""" --- Calendars --- """
+
+start_cal_label = tk.Label(root, text="Start Date")
+start_cal_label.config(font=("Calibri", 12, "bold"))
+start_cal_label.place(relx=0.48, rely=0.12)
+
+end_cal_label = tk.Label(root, text="End Date")
+end_cal_label.config(font=("Calibri", 12, "bold"))
+end_cal_label.place(relx=0.782, rely=0.12)
+
+start_cal = tkcalendar.Calendar(root, selectmode="day", year=2005, month=1, day=3)
+start_cal.place(relx=0.4, rely=0.18)
+
+end_cal = tkcalendar.Calendar(root, selectmode="day", year=2020, month=11, day=27)
+end_cal.place(relx=0.7, rely=0.18)
 
 
 """ --- Unfinished --- """
