@@ -1,18 +1,16 @@
-  
 import tkinter as tk
-#import tkinter.ttk as ttk
 import tkcalendar
 
-companies = ["ACN", "AT&T", "Adobe", "Amazon", "Appen", "Apple", "Bank of America", "Cisco", "Dell", "Disney", "Exxon", "Facebook",
-            "General Electric", "Google", "Hewlett-Packard", "IBM", "Intel", "JPMorgan Chase", "Kroger", "Lockheed Martin", "Microsoft",
-            "Netflix", "Oracle", "Proctor and Gamble", "Qualcomm", "Raytheon", "Salesforce", "UPS", "Wells Fargo"]
+companies = ["AAPL", "ACN", "ADBE", "AMZN", "AXP", "BAC", "CRM", "CSCO", "DELL",
+            "DIS", "FB", "GE", "GOOG", "HPQ", "IBM", "INTC", "JPM", "KR", "LMT",
+            "MSFT", "NFLX", "ORCL", "PG", "QCOM", "RTX", "T", "UPS", "WFC", "XOM"]
+
 
 """ --- Window Set-up --- """
 
 root = tk.Tk()
 root.title("Tech Stock Performance Analyzer")
 root.resizable(False, False)
-#ttk.Style('alt')
 
 # Dimensions of tk root window
 width = 1100
@@ -61,32 +59,32 @@ end_cal.place(relx=0.7, rely=0.16)
 
 """ --- Search Box --- """
 
-search_border = tk.Label(root, text="", borderwidth="1", relief="solid", width=66, height = 3)
-search_border.place(relx=0.468, rely=0.6)
+search_border = tk.Label(root, text="", borderwidth="1", relief="solid", width=50, height = 3)
+search_border.place(relx=0.519, rely=0.6)
 
 search_options = tk.StringVar()
 search_options.set(companies[0])
 
 search_menu = tk.OptionMenu(root, search_options, *companies)
 search_menu.config(relief="groove")
-search_menu.place(relx=0.485, rely=0.614)
+search_menu.place(relx=0.535, rely=0.613)
 
 search_cal = tkcalendar.DateEntry(locale='en_US', date_pattern='MM/dd/yyyy')
 search_cal.place(relx=0.632, rely=0.619)
 
 search_button = tk.Button(root, text="Search")
 search_button.config(width=10, bg="light steel blue", relief="groove")
-search_button.place(relx=0.8, rely=0.617)
+search_button.place(relx=0.75, rely=0.616)
 
 
 """ --- Output --- """
 
 output_box_label = tk.Label(root, text="OUTPUT")
 output_box_label.config(font=("Calibri", 12, "bold"))
-output_box_label.place(relx=0.645, rely=0.708)
+output_box_label.place(relx=0.644, rely=0.708)
 
 output_box = tk.Text(root, width=68, height = 5)
-output_box.place(relx=0.425, rely=0.76)
+output_box.place(relx=0.427, rely=0.76)
 
 
 """ --- Companies --- """
@@ -95,35 +93,16 @@ company_label = tk.Label(root, text="COMPANIES")
 company_label.config(font=("Calibri", 12, "bold"))
 company_label.place(relx=0.15, rely=0.1)
 
-var1 = tk.StringVar()
-var2 = tk.StringVar()
-var3 = tk.StringVar()
-var4 = tk.StringVar()
-var5 = tk.StringVar()
-var6 = tk.StringVar()
-var7 = tk.StringVar()
-var8 = tk.StringVar()
-var9 = tk.StringVar()
-var10 = tk.StringVar()
-var11 = tk.StringVar()
-var12= tk.StringVar()
-var13 = tk.StringVar()
-var14 = tk.StringVar()
-var15 = tk.StringVar()
-var16 = tk.StringVar()
-var17 = tk.StringVar()
-var18 = tk.StringVar()
-var19 = tk.StringVar()
-var20 = tk.StringVar()
-var21 = tk.StringVar()
-var22 = tk.StringVar()
-var23 = tk.StringVar()
-var24 = tk.StringVar()
-var25 = tk.StringVar()
-var26 = tk.StringVar()
-var27 = tk.StringVar()
-var28 = tk.StringVar()
-var29 = tk.StringVar()
+# Variables to determine selected companies
+var1, var2, var3, var4, var5, var6 = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
+var7, var8, var9, var10, var11, var12 = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
+var13, var14, var15, var16, var17, var18 = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
+var19, var20, var21, var22, var23, var24 = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
+var25,var26, var27, var28, var29 = tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
+
+var_list = [var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15, 
+          var16, var17, var18, var19, var20, var21, var22, var23, var24, var25, var26, var27, var28, var29]
+
 # Column 1
 google = tk.Checkbutton(root, text="Google", variable=var1, onvalue = "GOOG", offvalue="")
 microsoft = tk.Checkbutton(root, variable=var2, text="Microsoft", onvalue = "MSFT", offvalue="")
@@ -155,7 +134,7 @@ oracle.place(relx=0.07, rely=0.66)
 salesforce.place(relx=0.07, rely=0.71)
 qualcomm.place(relx=0.07, rely=0.76)
 exxon.place(relx=0.07, rely=0.81)
-att.place(relx=0.07, rely=0.86) 
+att.place(relx=0.07, rely=0.86)
 
 # Column 2
 apple = tk.Checkbutton(root, variable=var16, text="Apple", onvalue = "AAPL", offvalue="")
@@ -188,6 +167,7 @@ appen.place(relx=0.22, rely=0.71)
 disney.place(relx=0.22, rely=0.76)
 kroger.place(relx=0.22, rely=0.81)
 
+# Configuring each checkbox
 company_vars = [google, microsoft, acn, adobe, amazon, cisco, fb, ibm, intel, netflix, oracle, salesforce, qualcomm,
                 exxon, att, apple, bankA, ge, lock, hp, jpm, pg, ups, dell, raytheon, wf, appen, disney, kroger]
 
@@ -195,28 +175,24 @@ for company in company_vars:
     company.deselect()
     company.config(font=("Calibri", 12))
 
-List = [] # LIST List for the comapnies checked
-# LIST List for the variables of the companies
-varList = [var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14, var15, 
-          var16, var17, var18, var19, var20, var21, var22, var23, var24, var25, var26, var27, var28, var29] 
 
 """ --- Analysis Buttons --- """
+
 # Displays text depending on the boxes checked
 def checked():
     l = tk.Label(root, text=var1.get())
     l.pack()
-
-# LIST Add checked checkboxes to list 
-def addtolist():
-    global List
-
-    List = []
-    for item in varList:
+    
+# Returns list of checked companies
+def get_checked():
+    checked_companies = []
+    for item in var_list:
         if item.get() != "":
-            List.append(item.get())
-    print(List)
+            checked_companies.append(item.get())
+    print(checked_companies)
+
 # LIST Testing button for the addtolist() 
-b1 = tk.Button(root, text="TEST LIST", command=addtolist)
+b1 = tk.Button(root, text="TEST LIST", command=get_checked)
 b1.place(relx=0.3, rely=0.1)
 
 best_button = tk.Button(root, text="Find Best Stock Growth", command=[checked(), retrieve_date()])
