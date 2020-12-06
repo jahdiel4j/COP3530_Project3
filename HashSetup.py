@@ -7,7 +7,7 @@ class HashSetup:
     # List of companies in order of the CSV file's columns
     ordered_companies = []
 
-    """ Covert given "date" string into a formatted int (for insertion into AVL Tree) """
+    """ Convert given "date" string into a formatted int (for insertion into Hash Map) """
 
     def convert_date(self, date):
         # MM/DD/YYYY -> YYYYMMDD
