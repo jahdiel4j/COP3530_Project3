@@ -1,9 +1,15 @@
 import tkinter as tk
 import tkcalendar
+import HashSetup
+import AVLSetup
+
 
 companies = ["AAPL", "ACN", "ADBE", "AMZN", "AXP", "BAC", "CRM", "CSCO", "DELL",
             "DIS", "FB", "GE", "GOOG", "HPQ", "IBM", "INTC", "JPM", "KR", "LMT",
             "MSFT", "NFLX", "ORCL", "PG", "QCOM", "RTX", "T", "UPS", "WFC", "XOM"]
+
+AVL = AVLSetup.AVLSetup()
+Hash = HashSetup.HashSetup()
 
 
 """ --- Window Set-up --- """
@@ -26,13 +32,23 @@ y = (screen_height/2) - (height/1.85)
 root.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
 
+""" --- Output --- """
+
+output_box_label = tk.Label(root, text="OUTPUT")
+output_box_label.config(font=("Calibri", 12, "bold"))
+output_box_label.place(relx=0.644, rely=0.708)
+
+output_box = tk.Text(root, width=68, height = 5)
+output_box.place(relx=0.427, rely=0.76)
+
+
 """ --- Drop-down Menu for Implementation Choice --- """
 
 implementations = ["Hash Map", "AVL Tree"]
-imp_options = tk.StringVar()
-imp_options.set(implementations[0])
+imp_option = tk.StringVar()
+imp_option.set(implementations[0])
 
-implementation_menu = tk.OptionMenu(root, imp_options, *implementations)
+implementation_menu = tk.OptionMenu(root, imp_option, *implementations)
 implementation_menu.config(bg="light steel blue", relief="groove")
 implementation_menu.place(relx=0.88, rely=0.03)
 
@@ -50,41 +66,48 @@ end_cal_label = tk.Label(root, text="END DATE")
 end_cal_label.config(font=("Calibri", 12, "bold"))
 end_cal_label.place(relx=0.7772, rely=0.1)
 
-start_cal = tkcalendar.Calendar(root, selectmode="day", year=2005, month=1, day=3, locale='en_US', date_pattern='MM/dd/yyyy')
+start_cal = tkcalendar.Calendar(root, selectmode="day", year=2005, month=1, day=3, locale='en_US', date_pattern='MM/dd/yyyy',
+            mindate=tkcalendar.calendar_.calendar.datetime.date(2005, 1, 3), maxdate=tkcalendar.calendar_.calendar.datetime.date(2020, 11, 27))
 start_cal.place(relx=0.422, rely=0.16)
 
-end_cal = tkcalendar.Calendar(root, selectmode="day", year=2020, month=11, day=27, locale='en_US', date_pattern='MM/dd/yyyy')
+end_cal = tkcalendar.Calendar(root, selectmode="day", year=2020, month=11, day=27, locale='en_US', date_pattern='MM/dd/yyyy',
+            mindate=tkcalendar.calendar_.calendar.datetime.date(2020, 1, 3), maxdate=tkcalendar.calendar_.calendar.datetime.date(2020, 11, 27))
 end_cal.place(relx=0.7, rely=0.16)
 
 
 """ --- Search Box --- """
+def output_search(result):
+    pass
+    #currently in progress!
+    #output_box.delete()
+    #output_box.insert(result)
+
+def search():
+    search_company = search_option.get()
+    search_date = search_cal.get_date().strftime("%m/%d/%Y")
+
+    if imp_option.get() == "Hash Map":
+        output_search(Hash.search(search_company, search_date))
+    else:
+        output_search(AVL.search(search_company, search_date))
 
 search_border = tk.Label(root, text="", borderwidth="1", relief="solid", width=50, height = 3)
 search_border.place(relx=0.519, rely=0.6)
 
-search_options = tk.StringVar()
-search_options.set(companies[0])
+search_option = tk.StringVar()
+search_option.set(companies[0])
 
-search_menu = tk.OptionMenu(root, search_options, *companies)
+search_menu = tk.OptionMenu(root, search_option, *companies)
 search_menu.config(relief="groove")
 search_menu.place(relx=0.535, rely=0.613)
 
-search_cal = tkcalendar.DateEntry(locale='en_US', date_pattern='MM/dd/yyyy')
+search_cal = tkcalendar.DateEntry(root, selectmode="day", year=2005, month=1, day=3, locale='en_US', date_pattern='MM/dd/yyyy',
+            mindate=tkcalendar.calendar_.calendar.datetime.date(2005, 1, 3), maxdate=tkcalendar.calendar_.calendar.datetime.date(2020, 11, 27))
 search_cal.place(relx=0.632, rely=0.619)
 
 search_button = tk.Button(root, text="Search")
-search_button.config(width=10, bg="light steel blue", relief="groove")
+search_button.config(width=10, bg="light steel blue", relief="groove", command=search)
 search_button.place(relx=0.75, rely=0.616)
-
-
-""" --- Output --- """
-
-output_box_label = tk.Label(root, text="OUTPUT")
-output_box_label.config(font=("Calibri", 12, "bold"))
-output_box_label.place(relx=0.644, rely=0.708)
-
-output_box = tk.Text(root, width=68, height = 5)
-output_box.place(relx=0.427, rely=0.76)
 
 
 """ --- Companies --- """
