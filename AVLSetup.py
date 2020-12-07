@@ -73,7 +73,7 @@ class AVLSetup:
 
             # if the company value was valid at both dates and the growth is greater than the maximum growth,
             # reassign return values to current company
-            if (start_value != -1 and end_value != -1 and end_value-start_value) > max_growth:
+            if start_value != -1 and end_value != -1 and end_value-start_value > max_growth:
                 max_growth = (end_value-start_value)
                 max_company = company
 
@@ -94,7 +94,7 @@ class AVLSetup:
 
             # if the company value was valid at both dates and the growth is less than the minimum growth,
             # reassign return values to current company
-            if (start_value != -1 and end_value != -1 and end_value-start_value) < min_growth:
+            if start_value != -1 and end_value != -1 and end_value-start_value < min_growth:
                 min_growth = (end_value-start_value)
                 min_company = company
 

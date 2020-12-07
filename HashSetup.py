@@ -77,7 +77,7 @@ class HashSetup:
 
             # if the company value was valid at both dates and the growth is greater than the maximum growth,
             # reassign return values to current company
-            if (start_value != -1 and end_value != -1 and end_value-start_value) > max_growth:
+            if start_value != -1 and end_value != -1 and end_value-start_value > max_growth:
                 max_growth = (end_value-start_value)
                 max_company = company
 
@@ -98,7 +98,7 @@ class HashSetup:
 
             # if the company value was valid at both dates and the growth is less than the minimum growth,
             # reassign return values to current company
-            if (start_value != -1 and end_value != -1 and end_value-start_value) < min_growth:
+            if start_value != -1 and end_value != -1 and end_value-start_value < min_growth:
                 min_growth = (end_value-start_value)
                 min_company = company
 
@@ -108,8 +108,10 @@ setup = HashSetup()
 setup.initialize_companies_map()
 
 # Testing:
-"""com = setup.find_worst_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
-print(com)
+"""
+com, pric = setup.find_worst_stock_growth(['DELL'], '01/03/2005', '01/04/2005')
+print(com, ": ", pric)
 
-com = setup.find_best_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
-print(com)"""
+com, pric = setup.find_best_stock_growth(['DELL'], '01/03/2005', '01/04/2005')
+print(com, ": ", pric) 
+"""
