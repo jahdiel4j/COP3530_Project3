@@ -3,6 +3,7 @@ import tkcalendar
 import HashSetup
 import AVLSetup
 
+
 companies = ["AAPL", "ACN", "ADBE", "AMZN", "AXP", "BAC", "CRM", "CSCO", "DELL",
             "DIS", "FB", "GE", "GOOG", "HPQ", "IBM", "INTC", "JPM", "KR", "LMT",
             "MSFT", "NFLX", "ORCL", "PG", "QCOM", "RTX", "T", "UPS", "WFC", "XOM"]
@@ -11,6 +12,7 @@ AVL = AVLSetup.AVLSetup()
 AVL.initialize_companies_map()
 Hash = HashSetup.HashSetup()
 Hash.initialize_companies_map()
+
 
 """ --- Window Set-up --- """
 
@@ -34,6 +36,10 @@ root.geometry('%dx%d+%d+%d' % (width, height, x, y))
 disclaimer = tk.Label(root, text="* Stock analysis is based on closing times.", fg="gray")
 disclaimer.config(font=("Calibri", 10))
 disclaimer.place(relx=0.025, rely=0.035)
+
+elapsed_time = tk.Label(root, text="AVL Tree: " + str(AVL.setup_time) + " ns     " + "Hash Map: "+ str(Hash.setup_time) + " ns", fg="gray")
+elapsed_time.config(font=("Calibri", 10))
+elapsed_time.place(relx=0.7, rely=0.93)
 
 
 """ --- Output --- """
@@ -84,11 +90,7 @@ def output_search_retry():
 
 def output_search(result, company, date):
     output_box.delete("1.0", "end")
-    output_box.insert(tk.INSERT, company)
-    output_box.insert(tk.INSERT, " on ")
-    output_box.insert(tk.INSERT, date)
-    output_box.insert(tk.INSERT, ":\n")
-    output_box.insert(tk.INSERT, result)
+    output_box.insert(tk.INSERT, "Price of " + company + " on " + date + ":\n" + result)
 
 def search():
     company = search_option.get()
@@ -216,15 +218,7 @@ for company in company_vars:
 
 def output_analysis(choice, company, growth, start, end):
     output_box.delete("1.0", "end")
-    output_box.insert(tk.INSERT, choice)
-    output_box.insert(tk.INSERT, " growth from ")
-    output_box.insert(tk.INSERT, start)
-    output_box.insert(tk.INSERT, " to ")
-    output_box.insert(tk.INSERT, end)
-    output_box.insert(tk.INSERT, ":\n")
-    output_box.insert(tk.INSERT, company)
-    output_box.insert(tk.INSERT, ", ")
-    output_box.insert(tk.INSERT, format(growth, ".2f"))
+    output_box.insert(tk.INSERT, choice + " growth from " + start + " to " + end +":\n" + company + ", " + format(growth, ".2f"))
 
 def output_retry():
     output_box.delete("1.0", "end")
@@ -275,5 +269,6 @@ best_button.place(relx=0.607, rely=0.46)
 worst_button = tk.Button(root, text="Find Worst Stock Growth", command=find_worst)
 worst_button.config(width =20, bg="light steel blue", relief="groove")
 worst_button.place(relx=0.607, rely=0.52)
+
 
 root.mainloop()
