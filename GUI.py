@@ -31,6 +31,10 @@ y = (screen_height/2) - (height/1.85)
 # Set screen dimensions & location the root window
 root.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
+disclaimer = tk.Label(root, text="* Stock analysis is based on closing times.", fg="gray")
+disclaimer.config(font=("Calibri", 10))
+disclaimer.place(relx=0.025, rely=0.035)
+
 
 """ --- Output --- """
 
@@ -50,7 +54,7 @@ imp_option.set(implementations[0])
 
 implementation_menu = tk.OptionMenu(root, imp_option, *implementations)
 implementation_menu.config(bg="light steel blue", relief="groove")
-implementation_menu.place(relx=0.88, rely=0.03)
+implementation_menu.place(relx=0.885, rely=0.035)
 
 
 """ --- Calendars --- """
@@ -68,11 +72,12 @@ start_cal = tkcalendar.Calendar(root, selectmode="day", year=2005, month=1, day=
 start_cal.place(relx=0.422, rely=0.16)
 
 end_cal = tkcalendar.Calendar(root, selectmode="day", year=2020, month=11, day=27, locale='en_US', date_pattern='MM/dd/yyyy',
-            mindate=tkcalendar.calendar_.calendar.datetime.date(2020, 1, 3), maxdate=tkcalendar.calendar_.calendar.datetime.date(2020, 11, 27))
+            mindate=tkcalendar.calendar_.calendar.datetime.date(2005, 1, 3), maxdate=tkcalendar.calendar_.calendar.datetime.date(2020, 11, 27))
 end_cal.place(relx=0.7, rely=0.16)
 
 
 """ --- Search Box --- """
+
 def output_search_retry():
     output_box.delete("1.0", "end")
     output_box.insert(tk.INSERT, "Please check selected date/company and try again.")
