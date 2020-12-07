@@ -1,11 +1,14 @@
 import csv
 from AVLTree import AVLTree
+import time
 
 class AVLSetup:
     # Dictionary/Map of Company AVL Trees
     companies_list = {}
     # List of companies in order of the CSV file's columns
     ordered_companies = []
+    # Elapsed time to insert all nodes into AVL
+    setup_time = 0
 
     """ Covert given "date" string into a formatted int (for insertion into AVL Tree) """
     def convert_date(self, date):
@@ -30,6 +33,8 @@ class AVLSetup:
         reader = csv.reader(csv_file)
         companies = next(reader)
 
+        s = time.time_ns()
+
         for i in range(len(companies)):
             # Index 0 in the 1st row is where it says "Date"
             if i != 0:
@@ -50,6 +55,8 @@ class AVLSetup:
 
                 i += 1
 
+        e = time.time_ns()
+        self.setup_time = e-s
         csv_file.close()
 
     """ Searches for a stock value for a given company & date """
@@ -99,23 +106,3 @@ class AVLSetup:
                 min_company = company
 
         return min_company, min_growth
-
-
-
-
-setup = AVLSetup()
-setup.initialize_companies_map()
-
-# Testing:
-
-"""com = setup.find_worst_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
-print(com)
-
-com = setup.find_best_stock_growth(['AMZN', 'GOOG'], '01/03/2005', '01/04/2005')
-print(com)"""
-
-"""for i in range(5):
-    date = input("Enter date in YYYYMMDD format: ")
-    company = input("Enter company stock abbreviation: ")
-    result = setup.search(company, date)
-    print('%.2f' %result)"""

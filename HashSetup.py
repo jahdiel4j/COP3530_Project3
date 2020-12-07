@@ -1,11 +1,14 @@
 from HashMap import HashMap
 import csv
+import time
 
 class HashSetup:
     # Dictionary/Map of Company Hashmaps
     companies_list = {}
     # List of companies in order of the CSV file's columns
     ordered_companies = []
+    # Elapsed time to insert all nodes into Hashmap
+    setup_time = 0
 
     """ Convert given "date" string into a formatted int (for insertion into Hash Map) """
 
@@ -32,6 +35,8 @@ class HashSetup:
         reader = csv.reader(csv_file)
         companies = next(reader)
 
+        s = time.time_ns()
+
         for i in range(len(companies)):
             # Index 0 in the 1st column is where it says "Date"
             if i != 0:
@@ -52,6 +57,8 @@ class HashSetup:
 
                 i += 1
 
+        e = time.time_ns()
+        self.setup_time = e-s
         csv_file.close()
 
     """ Given a company abbreviation, a start date and end date given in MM/DD/YYYY format,
@@ -103,15 +110,3 @@ class HashSetup:
                 min_company = company
 
         return min_company, min_growth
-
-setup = HashSetup()
-setup.initialize_companies_map()
-
-# Testing:
-"""
-com, pric = setup.find_worst_stock_growth(['DELL'], '01/03/2005', '01/04/2005')
-print(com, ": ", pric)
-
-com, pric = setup.find_best_stock_growth(['DELL'], '01/03/2005', '01/04/2005')
-print(com, ": ", pric) 
-"""

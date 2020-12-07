@@ -3,14 +3,14 @@ import tkcalendar
 import HashSetup
 import AVLSetup
 
-
 companies = ["AAPL", "ACN", "ADBE", "AMZN", "AXP", "BAC", "CRM", "CSCO", "DELL",
             "DIS", "FB", "GE", "GOOG", "HPQ", "IBM", "INTC", "JPM", "KR", "LMT",
             "MSFT", "NFLX", "ORCL", "PG", "QCOM", "RTX", "T", "UPS", "WFC", "XOM"]
 
 AVL = AVLSetup.AVLSetup()
+AVL.initialize_companies_map()
 Hash = HashSetup.HashSetup()
-
+Hash.initialize_companies_map()
 
 """ --- Window Set-up --- """
 
@@ -275,6 +275,5 @@ best_button.place(relx=0.607, rely=0.46)
 worst_button = tk.Button(root, text="Find Worst Stock Growth", command=find_worst)
 worst_button.config(width =20, bg="light steel blue", relief="groove")
 worst_button.place(relx=0.607, rely=0.52)
-
 
 root.mainloop()
