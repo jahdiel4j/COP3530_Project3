@@ -55,9 +55,6 @@ implementation_menu.place(relx=0.88, rely=0.03)
 
 """ --- Calendars --- """
 
-def retrieve_date():
-    print(start_cal.get_date())
-
 start_cal_label = tk.Label(root, text="START DATE")
 start_cal_label.config(font=("Calibri", 12, "bold"))
 start_cal_label.place(relx=0.493, rely=0.1)
@@ -76,6 +73,9 @@ end_cal.place(relx=0.7, rely=0.16)
 
 
 """ --- Search Box --- """
+def output_search_retry():
+    output_box.delete("1.0", "end")
+    output_box.insert(tk.INSERT, "Please check selected date/company and try again.")
 
 def output_search(result, company, date):
     output_box.delete("1.0", "end")
@@ -90,9 +90,14 @@ def search():
     date = search_cal.get_date().strftime("%m/%d/%Y")
 
     if imp_option.get() == "Hash Map":
-        output_search(str(Hash.search(company, date)), company, date)
+        price = Hash.search(company, date)
     else:
-        output_search(str(AVL.search(company, date)), company, date)
+        price = AVL.search(company, date)
+
+    if price == -1:
+        output_search_retry()
+    else:
+        output_search(str(price), company, date)
 
 search_border = tk.Label(root, text="", borderwidth="1", relief="solid", width=50, height = 3)
 search_border.place(relx=0.519, rely=0.6)
@@ -215,6 +220,10 @@ def output_analysis(choice, company, growth, start, end):
     output_box.insert(tk.INSERT, company)
     output_box.insert(tk.INSERT, ", ")
     output_box.insert(tk.INSERT, format(growth, ".2f"))
+
+def output_retry():
+    output_box.delete("1.0", "end")
+    output_box.insert(tk.INSERT, "Please check selected dates/companies and try again.")
     
 # Returns list of checked companies
 def get_checked():
@@ -222,7 +231,6 @@ def get_checked():
     for item in var_list:
         if item.get() != "":
             checked_companies.append(item.get())
-    print(checked_companies)
     return checked_companies
 
 def find_best():
@@ -232,9 +240,12 @@ def find_best():
     
     if imp_option.get() == "Hash Map":
         company, growth = Hash.find_best_stock_growth(checked_companies, start, end)
-        output_analysis("Best", company, growth, start, end)
     else:
-        company, growth = Hash.find_best_stock_growth(checked_companies, start, end)
+        company, growth = AVL.find_best_stock_growth(checked_companies, start, end)
+
+    if growth == -1000 or company == "":
+        output_retry()
+    else:
         output_analysis("Best", company, growth, start, end)
 
 def find_worst():
@@ -244,9 +255,12 @@ def find_worst():
     
     if imp_option.get() == "Hash Map":
         company, growth = Hash.find_worst_stock_growth(checked_companies, start, end)
-        output_analysis("Worst", company, growth, start, end)
     else:
-        company, growth = Hash.find_worst_stock_growth(checked_companies, start, end)
+        company, growth = AVL.find_worst_stock_growth(checked_companies, start, end)
+
+    if growth == 1000 or company == "":
+        output_retry()
+    else:
         output_analysis("Worst", company, growth, start, end)
 
 best_button = tk.Button(root, text="Find Best Stock Growth", command=find_best)
