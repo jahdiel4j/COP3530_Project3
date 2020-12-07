@@ -264,10 +264,11 @@ def find_worst():
 
 best_button = tk.Button(root, text="Find Best Performing Stock", command=find_best)
 best_button.config(width=25, bg="light steel blue", relief="groove")
-best_button.place(relx=0.607, rely=0.46)
+best_button.place(relx=0.593, rely=0.46)
 
 worst_button = tk.Button(root, text="Find Worst Performing Stock", command=find_worst)
 worst_button.config(width =25, bg="light steel blue", relief="groove")
-worst_button.place(relx=0.607, rely=0.52)
+worst_button.place(relx=0.593, rely=0.52)
+
 
 root.mainloop()
