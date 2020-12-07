@@ -218,7 +218,7 @@ for company in company_vars:
 
 def output_analysis(choice, company, growth, start, end):
     output_box.delete("1.0", "end")
-    output_box.insert(tk.INSERT, choice + " growth from " + start + " to " + end +":\n" + company + ", " + format(growth, ".2f"))
+    output_box.insert(tk.INSERT, choice + " performance from " + start + " to " + end +":\n" + company + ", " + format(growth, ".2f"))
 
 def output_retry():
     output_box.delete("1.0", "end")
@@ -262,13 +262,12 @@ def find_worst():
     else:
         output_analysis("Worst", company, growth, start, end)
 
-best_button = tk.Button(root, text="Find Best Stock Growth", command=find_best)
-best_button.config(width=20, bg="light steel blue", relief="groove")
+best_button = tk.Button(root, text="Find Best Performing Stock", command=find_best)
+best_button.config(width=25, bg="light steel blue", relief="groove")
 best_button.place(relx=0.607, rely=0.46)
 
-worst_button = tk.Button(root, text="Find Worst Stock Growth", command=find_worst)
-worst_button.config(width =20, bg="light steel blue", relief="groove")
+worst_button = tk.Button(root, text="Find Worst Performing Stock", command=find_worst)
+worst_button.config(width =25, bg="light steel blue", relief="groove")
 worst_button.place(relx=0.607, rely=0.52)
-
 
 root.mainloop()
