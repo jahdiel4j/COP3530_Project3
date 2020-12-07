@@ -76,20 +76,23 @@ end_cal.place(relx=0.7, rely=0.16)
 
 
 """ --- Search Box --- """
-def output_search(result):
-    pass
-    #currently in progress!
-    #output_box.delete()
-    #output_box.insert(result)
+
+def output_search(result, company, date):
+    output_box.delete("1.0", "end")
+    output_box.insert(tk.INSERT, company)
+    output_box.insert(tk.INSERT, " on ")
+    output_box.insert(tk.INSERT, date)
+    output_box.insert(tk.INSERT, ":\n")
+    output_box.insert(tk.INSERT, result)
 
 def search():
-    search_company = search_option.get()
-    search_date = search_cal.get_date().strftime("%m/%d/%Y")
+    company = search_option.get()
+    date = search_cal.get_date().strftime("%m/%d/%Y")
 
     if imp_option.get() == "Hash Map":
-        output_search(Hash.search(search_company, search_date))
+        output_search(str(Hash.search(company, date)), company, date)
     else:
-        output_search(AVL.search(search_company, search_date))
+        output_search(str(AVL.search(company, date)), company, date)
 
 search_border = tk.Label(root, text="", borderwidth="1", relief="solid", width=50, height = 3)
 search_border.place(relx=0.519, rely=0.6)
@@ -201,10 +204,17 @@ for company in company_vars:
 
 """ --- Analysis Buttons --- """
 
-# Displays text depending on the boxes checked
-def checked():
-    l = tk.Label(root, text=var1.get())
-    l.pack()
+def output_analysis(choice, company, growth, start, end):
+    output_box.delete("1.0", "end")
+    output_box.insert(tk.INSERT, choice)
+    output_box.insert(tk.INSERT, " growth from ")
+    output_box.insert(tk.INSERT, start)
+    output_box.insert(tk.INSERT, " to ")
+    output_box.insert(tk.INSERT, end)
+    output_box.insert(tk.INSERT, ":\n")
+    output_box.insert(tk.INSERT, company)
+    output_box.insert(tk.INSERT, ", ")
+    output_box.insert(tk.INSERT, format(growth, ".2f"))
     
 # Returns list of checked companies
 def get_checked():
@@ -213,16 +223,37 @@ def get_checked():
         if item.get() != "":
             checked_companies.append(item.get())
     print(checked_companies)
+    return checked_companies
 
-# LIST Testing button for the addtolist() 
-b1 = tk.Button(root, text="TEST LIST", command=get_checked)
-b1.place(relx=0.3, rely=0.1)
+def find_best():
+    checked_companies = get_checked()
+    start = start_cal.get_date()
+    end = end_cal.get_date()
+    
+    if imp_option.get() == "Hash Map":
+        company, growth = Hash.find_best_stock_growth(checked_companies, start, end)
+        output_analysis("Best", company, growth, start, end)
+    else:
+        company, growth = Hash.find_best_stock_growth(checked_companies, start, end)
+        output_analysis("Best", company, growth, start, end)
 
-best_button = tk.Button(root, text="Find Best Stock Growth", command=[checked(), retrieve_date()])
+def find_worst():
+    checked_companies = get_checked()
+    start = start_cal.get_date()
+    end = end_cal.get_date()
+    
+    if imp_option.get() == "Hash Map":
+        company, growth = Hash.find_worst_stock_growth(checked_companies, start, end)
+        output_analysis("Worst", company, growth, start, end)
+    else:
+        company, growth = Hash.find_worst_stock_growth(checked_companies, start, end)
+        output_analysis("Worst", company, growth, start, end)
+
+best_button = tk.Button(root, text="Find Best Stock Growth", command=find_best)
 best_button.config(width=20, bg="light steel blue", relief="groove")
 best_button.place(relx=0.607, rely=0.46)
 
-worst_button = tk.Button(root, text="Find Worst Stock Growth", command=[checked(), retrieve_date()])
+worst_button = tk.Button(root, text="Find Worst Stock Growth", command=find_worst)
 worst_button.config(width =20, bg="light steel blue", relief="groove")
 worst_button.place(relx=0.607, rely=0.52)
 
