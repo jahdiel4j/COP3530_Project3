@@ -66,7 +66,7 @@ class AVLSetup:
         return self.companies_list[company].search(date)
 
     def find_best_stock_growth(self, companies, start_date, end_date):
-        max_growth = -1000 # arbitrary value to compare initial growth. No stock drops $1000 in one day, so we are safe
+        max_growth = -10000 # arbitrary value to compare initial growth. No stock drops $10000 in one day, so we are safe
         max_company = ""   # if all the companies are invalid at the given dates, say holiday, returns empty string for company name
 
         start_date = self.convert_date(start_date)
@@ -87,7 +87,7 @@ class AVLSetup:
         return max_company, max_growth
 
     def find_worst_stock_growth(self, companies, start_date, end_date):
-        min_growth = 1000  # arbitrary value to compare initial growth. No stock grows $1000 in one day, so we are safe
+        min_growth = 10000  # arbitrary value to compare initial growth. No stock grows $10000 in one day, so we are safe
         min_company = ""   # if all the companies are invalid at the given dates, say holiday, returns empty string for company name
 
         start_date = self.convert_date(start_date)

@@ -242,7 +242,7 @@ def find_best():
     else:
         company, growth = AVL.find_best_stock_growth(checked_companies, start, end)
 
-    if growth == -1000 or company == "":
+    if growth == -10000 or company == "":
         output_retry()
     else:
         output_analysis("Best", company, growth, start, end)
@@ -257,7 +257,7 @@ def find_worst():
     else:
         company, growth = AVL.find_worst_stock_growth(checked_companies, start, end)
 
-    if growth == 1000 or company == "":
+    if growth == 10000 or company == "":
         output_retry()
     else:
         output_analysis("Worst", company, growth, start, end)
